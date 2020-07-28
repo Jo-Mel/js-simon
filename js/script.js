@@ -11,8 +11,11 @@
 var arrPc = []; // creo l'array vuoto dove vado a memorizzare i 5 numeri casuali del Pc
 
 while (arrPc.length < 5) {
-    var nPc = generaRandom(1,100); // richiamo la funzione che mi genera i numeri random da 1 a 100 senza escludere i doppioni
-    arrPc.push(nPc);
+    var nPc = generaRandom(1,100); // richiamo la funzione che mi genera i numeri random da 1 a 100
+    
+    if (!arrPc.includes(nPc)){
+        arrPc.push(nPc);
+    }
 }
 // console.log(arrPc);
 
@@ -23,10 +26,13 @@ var match = []; // creo l'array vuoto dove vado a memorizzare gli input corretti
 
 setTimeout(function(){ // con setTimeout creo un timer di 10 secondi che partirà alla chiusura dell'alert
     for (var i = 0; i < 5; i++){
-        var nPlayer = parseInt(prompt('Inserisci il numero'));
+        var nPlayer = parseInt(prompt('Inserisci un numero da 1 a 100'));
+        while (nPlayer <= 0 || nPlayer > 100){
+            var nPlayer = parseInt(prompt('Attenzione! Il numero dev essere tra 1 e 100'));
+        }
         arrPlayer.push(nPlayer);
 
-        if (arrPc.includes(nPlayer)){
+        if (arrPc.includes(nPlayer) && !match.includes(nPlayer)){
             match.push(nPlayer)
         }
     } 
